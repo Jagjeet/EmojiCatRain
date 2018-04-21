@@ -1,0 +1,10 @@
+{
+  "name": "EmojiCatRain",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jagjeet Khalsa",
+  "license": "MIT",
+  "dependencies": {
+    "twemoji": "^2.5.1"
+  }
+}
