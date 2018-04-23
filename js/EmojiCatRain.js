@@ -21,8 +21,10 @@ ElementPosition.prototype.updateY = function updateY() {
 
 const EmojiCatRain = function EmojiCatRain()  {
   this.canvas = document.createElement('canvas');
-  this.canvas.height = 600;
-  this.canvas.width = 600;
+  let h = window.innerHeight;
+  let w = window.innerWidth;
+  this.canvas.height = h;
+  this.canvas.width = w;
 
   let catElemBuf = [];
 
@@ -40,7 +42,7 @@ const EmojiCatRain = function EmojiCatRain()  {
   let ctx = this.canvas.getContext('2d');
 
   ctx.fillStyle = 'black';
-  ctx.fillRect(0, 0, 599, 599);
+  ctx.fillRect(0, 0, w - 1, h - 1);
 
   document.body.insertBefore(this.canvas, document.body.nextSibling);
 
@@ -51,7 +53,7 @@ const EmojiCatRain = function EmojiCatRain()  {
     if (e.target && e.target.nodeName === 'BUTTON') {
       console.log("Reset Clicked");
       ctx.fillStyle = 'black';
-      ctx.fillRect(0, 0, 599, 599);
+      ctx.fillRect(0, 0, w - 1, h - 1);
       catElemBuf = [];
     }
   });
@@ -64,7 +66,7 @@ const EmojiCatRain = function EmojiCatRain()  {
     let newEmojisIndex = getRandomIntInclusive(0, 10);
 
     for (let i= 0; i < numNewEmojis[newEmojisIndex]; i++) {
-      let x = getRandomIntInclusive(0, 599);
+      let x = getRandomIntInclusive(0, w - 1);
       let y = -42;
       let size = getRandomIntInclusive(16, 42);
       let dWidth = size; 
@@ -80,14 +82,14 @@ const EmojiCatRain = function EmojiCatRain()  {
     });
 
     catElemBuf = catElemBuf.filter(elem => {
-      if (elem.y > 599 + 42) {
+      if (elem.y > h + 42) {
         return false;
       }
        return true;
     });
 
     ctx.fillStyle = 'black';
-    ctx.fillRect(0, 0, 599, 599);
+    ctx.fillRect(0, 0, w - 1, h - 1);
 
     catElemBuf.forEach(elem => {
       ctx.drawImage(elem.element, elem.x, elem.y, elem.dWidth, elem.dHeight);
